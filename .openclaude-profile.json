@@ -1,0 +1,11 @@
+{
+  "profile": "openai",
+  "env": {
+    "OPENAI_BASE_URL": "https://integrate.api.nvidia.com/v1",
+    "OPENAI_MODEL": "google/gemma-3n-e2b-it",
+    "OPENAI_AUTH_HEADER": "Authorization",
+    "OPENAI_AUTH_SCHEME": "bearer",
+    "OPENAI_API_KEY": "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"
+  },
+  "createdAt": "2026-05-14T03:36:05.440Z"
+}

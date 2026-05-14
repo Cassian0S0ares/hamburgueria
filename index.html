@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Hamburgueria artesanal - Os melhores hambúrgueres da cidade. Ingredientes frescos, sabor incomparável. Venha nos visitar!">
+    <meta name="keywords" content="hamburgueria, hambúrguer artesanal, burger, comida, restaurante">
+    <meta property="og:title" content="Hamburgueria - Sabores Incomparáveis">
+    <meta property="og:description" content="Os melhores hambúrgueres artesanais da cidade. Ingredientes frescos e sabor incomparável.">
+    <meta property="og:type" content="website">
+    <title>Hamburgueria | Sabores Incomparáveis</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+    <!-- ===== SPLASH SCREEN ===== -->
+    <div id="splash" class="splash" role="status" aria-label="Carregando">
+        <div class="splash-circle">
+            <svg class="splash-burger" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <!-- Top bun -->
+                <ellipse cx="100" cy="62" rx="72" ry="30" fill="#D4891C"/>
+                <ellipse cx="100" cy="60" rx="68" ry="26" fill="#E8A832"/>
+                <!-- Sesame seeds -->
+                <ellipse cx="78" cy="50" rx="4" ry="2.5" fill="#F5E6C8" transform="rotate(-15 78 50)"/>
+                <ellipse cx="100" cy="45" rx="4" ry="2.5" fill="#F5E6C8" transform="rotate(10 100 45)"/>
+                <ellipse cx="122" cy="50" rx="4" ry="2.5" fill="#F5E6C8" transform="rotate(15 122 50)"/>
+                <ellipse cx="88" cy="56" rx="3.5" ry="2" fill="#F5E6C8" transform="rotate(-5 88 56)"/>
+                <ellipse cx="112" cy="56" rx="3.5" ry="2" fill="#F5E6C8" transform="rotate(5 112 56)"/>
+                <!-- Lettuce -->
+                <path d="M30 82 Q42 72 54 82 Q66 72 78 82 Q90 72 100 82 Q112 72 124 82 Q136 72 148 82 Q160 72 170 82" fill="#4CAF50" stroke="none"/>
+                <path d="M32 85 Q44 75 56 85 Q68 75 80 85 Q92 75 100 84 Q112 75 124 85 Q136 75 148 85 Q160 75 168 85" fill="#66BB6A"/>
+                <!-- Cheese -->
+                <path d="M28 88 L172 88 L168 96 Q160 100 152 96 Q144 100 136 96 Q128 100 120 96 Q112 100 104 96 Q96 100 88 96 Q80 100 72 96 Q64 100 56 96 Q48 100 40 96 L28 88Z" fill="#FFC107"/>
+                <!-- Patty -->
+                <rect x="30" y="96" width="140" height="22" rx="11" fill="#6D4C41"/>
+                <rect x="32" y="98" width="136" height="18" rx="9" fill="#795548"/>
+                <!-- Grill marks -->
+                <line x1="55" y1="100" x2="55" y2="114" stroke="#5D4037" stroke-width="2" stroke-linecap="round"/>
+                <line x1="80" y1="100" x2="80" y2="114" stroke="#5D4037" stroke-width="2" stroke-linecap="round"/>
+                <line x1="105" y1="100" x2="105" y2="114" stroke="#5D4037" stroke-width="2" stroke-linecap="round"/>
+                <line x1="130" y1="100" x2="130" y2="114" stroke="#5D4037" stroke-width="2" stroke-linecap="round"/>
+                <!-- Tomato -->
+                <path d="M35 118 L165 118 L162 128 L38 128 Z" fill="#E53935"/>
+                <path d="M38 120 L162 120 L160 126 L40 126 Z" fill="#EF5350"/>
+                <!-- Bottom bun -->
+                <path d="M28 128 L172 128 Q172 152 100 152 Q28 152 28 128 Z" fill="#D4891C"/>
+                <path d="M32 128 L168 128 Q168 148 100 148 Q32 148 32 128 Z" fill="#E8A832"/>
+            </svg>
+        </div>
+    </div>
+
+    <!-- ===== NAVIGATION ===== -->
+    <nav class="navbar" id="navbar" role="navigation" aria-label="Menu principal">
+        <div class="container navbar__inner">
+            <a href="#" class="navbar__logo" aria-label="Hamburgueria - Início">
+                <svg class="navbar__logo-icon" viewBox="0 0 40 40" width="40" height="40" aria-hidden="true">
+                    <ellipse cx="20" cy="14" rx="14" ry="6" fill="#E8A832"/>
+                    <rect x="7" y="18" width="26" height="4" rx="2" fill="#4CAF50"/>
+                    <rect x="7" y="22" width="26" height="5" rx="2.5" fill="#795548"/>
+                    <path d="M7 27 L33 27 Q33 34 20 34 Q7 34 7 27 Z" fill="#E8A832"/>
+                </svg>
+                <span>Hamburgueria</span>
+            </a>
+            <button class="navbar__toggle" id="navToggle" aria-label="Abrir menu" aria-expanded="false">
+                <span></span><span></span><span></span>
+            </button>
+            <ul class="navbar__menu" id="navMenu" role="menubar">
+                <li role="none"><a href="#hero" role="menuitem">Início</a></li>
+                <li role="none"><a href="#depoimentos" role="menuitem">Depoimentos</a></li>
+                <li role="none"><a href="#melhores" role="menuitem">Melhores</a></li>
+                <li role="none"><a href="#cardapio" role="menuitem">Cardápio</a></li>
+                <li role="none"><a href="#local" role="menuitem">Local</a></li>
+                <li role="none"><a href="#contato" class="btn btn--sm" role="menuitem">Contato</a></li>
+            </ul>
+        </div>
+    </nav>
+
+
+    <main id="main-content">
+
+        <!-- ===== HERO SECTION ===== -->
+        <section id="hero" class="hero" aria-label="Seção principal">
+            <div class="hero__bg"></div>
+            <div class="container hero__inner">
+                <div class="hero__content">
+                    <span class="hero__badge">Artesanal desde 2018</span>
+                    <h1 class="hero__title">
+                        Sabores que<br>
+                        <span class="hero__title--accent">Viciam</span>
+                    </h1>
+                    <p class="hero__subtitle">Hambúrgueres artesanais feitos com ingredientes selecionados, pães assados diariamente e aquele sabor que faz você voltar sempre.</p>
+                    <div class="hero__actions">
+                        <a href="#melhores" class="btn btn--primary btn--lg">Ver Cardápio</a>
+                        <a href="#local" class="btn btn--outline btn--lg">Como Chegar</a>
+                    </div>
+                    <div class="hero__stats">
+                        <div class="hero__stat">
+                            <strong>15k+</strong>
+                            <span>Clientes felizes</span>
+                        </div>
+                        <div class="hero__stat">
+                            <strong>4.9</strong>
+                            <span>Avaliação média</span>
+                        </div>
+                        <div class="hero__stat">
+                            <strong>30+</strong>
+                            <span>Opções no menu</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero__visual">
+                    <div class="hero__burger-wrap">
+                <video class="hero__burger-video" src="assets/374049230.mp4" muted playsinline preload="auto" aria-label="Vídeo de hambúrguer artesanal"></video></video></video></video>
+                <div class="hero__video-progress" aria-hidden="true">
+                    <div class="hero__video-progress-bar"></div>
+                </div>
+                    </div>
+                </div>
+            </div>
+            <div class="hero__scroll-indicator" aria-hidden="true">
+                <span>Role para baixo</span>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M7 13l5 5 5-5M7 6l5 5 5-5"/>
+                </svg>
+            </div>
+        </section>
+
+        <!-- ===== SOCIAL PROOF / DEPOIMENTOS ===== -->
+        <section id="depoimentos" class="testimonials" aria-label="Depoimentos de clientes">
+            <div class="container">
+                <header class="section-header">
+                    <span class="section-header__tag">Depoimentos</span>
+                    <h2 class="section-header__title">O que nossos clientes dizem</h2>
+                    <p class="section-header__subtitle">Mais de 15.000 clientes satisfeitos e uma avaliação média de 4.9 estrelas.</p>
+                </header>
+                <div class="testimonials__grid">
+                    <!-- Review 1 -->
+                    <article class="testimonial-card" itemscope itemtype="https://schema.org/Review">
+                        <div class="testimonial-card__stars" aria-label="5 de 5 estrelas">
+                            <svg viewBox="0 0 20 20" fill="#FFC107"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L10 13.27l-4.77 2.44.91-5.32L2.27 6.7l5.34-.78z"/></svg>
+                            <svg viewBox="0 0 20 20" fill="#FFC107"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L10 13.27l-4.77 2.44.91-5.32L2.27 6.7l5.34-.78z"/></svg>
+                            <svg viewBox="0 0 20 20" fill="#FFC107"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L10 13.27l-4.77 2.44.91-5.32L2.27 6.7l5.34-.78z"/></svg>
+                            <svg viewBox="0 0 20 20" fill="#FFC107"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L10 13.27l-4.77 2.44.91-5.32L2.27 6.7l5.34-.78z"/></svg>
+                            <svg viewBox="0 0 20 20" fill="#FFC107"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L10 13.27l-4.77 2.44.91-5.32L2.27 6.7l5.34-.78z"/></svg>
+                        </div>
+                        <blockquote class="testimonial-card__text" itemprop="reviewBody">
+                            "O melhor hambúrguer que já comi na vida! O pão é assado na hora, a carne é suculenta e os ingredientes são super frescos. Virei cliente assíduo!"
+                        </blockquote>
+                        <footer class="testimonial-card__author">
+                            <div class="testimonial-card__avatar">RM</div>
+                            <div>
+                                <cite class="testimonial-card__name" itemprop="author">Rafael Mendes</cite>
+                                <span class="testimonial-card__role">Cliente desde 2020</span>
+                            </div>
+                        </footer>
+                    </article>
+                    <!-- Review 2 -->
+                    <article class="testimonial-card" itemscope itemtype="https://schema.org/Review">
+                        <div class="testimonial-card__stars" aria-label="5 de 5 estrelas">
+                            <svg viewBox="0 0 20 20" fill="#FFC107"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L10 13.27l-4.77 2.44.91-5.32L2.27 6.7l5.34-.78z"/></svg>
+                            <svg viewBox="0 0 20 20" fill="#FFC107"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L10 13.27l-4.77 2.44.91-5.32L2.27 6.7l5.34-.78z"/></svg>
+                            <svg viewBox="0 0 20 20" fill="#FFC107"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L10 13.27l-4.77 2.44.91-5.32L2.27 6.7l5.34-.78z"/></svg>
+                            <svg viewBox="0 0 20 20" fill="#FFC107"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L10 13.27l-4.77 2.44.91-5.32L2.27 6.7l5.34-.78z"/></svg>
+                            <svg viewBox="0 0 20 20" fill="#FFC107"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L10 13.27l-4.77 2.44.91-5.32L2.27 6.7l5.34-.78z"/></svg>
+                        </div>
+                        <blockquote class="testimonial-card__text" itemprop="reviewBody">
+                            "Ambiente incrível e atendimento nota 10! A batata frita crocante com cheddar é viciante. Levo minha família toda semana, nunca decepciona."
+                        </blockquote>
+                        <footer class="testimonial-card__author">
+                            <div class="testimonial-card__avatar">CS</div>
+                            <div>
+                                <cite class="testimonial-card__name" itemprop="author">Camila Santos</cite>
+                                <span class="testimonial-card__role">Cliente desde 2021</span>
+                            </div>
+                        </footer>
+                    </article>
+                    <!-- Review 3 -->
+                    <article class="testimonial-card" itemscope itemtype="https://schema.org/Review">
+                        <div class="testimonial-card__stars" aria-label="5 de 5 estrelas">
+                            <svg viewBox="0 0 20 20" fill="#FFC107"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L10 13.27l-4.77 2.44.91-5.32L2.27 6.7l5.34-.78z"/></svg>
+                            <svg viewBox="0 0 20 20" fill="#FFC107"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L10 13.27l-4.77 2.44.91-5.32L2.27 6.7l5.34-.78z"/></svg>
+                            <svg viewBox="0 0 20 20" fill="#FFC107"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L10 13.27l-4.77 2.44.91-5.32L2.27 6.7l5.34-.78z"/></svg>
+                            <svg viewBox="0 0 20 20" fill="#FFC107"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L10 13.27l-4.77 2.44.91-5.32L2.27 6.7l5.34-.78z"/></svg>
+                            <svg viewBox="0 0 20 20" fill="#FFC107"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L10 13.27l-4.77 2.44.91-5.32L2.27 6.7l5.34-.78z"/></svg>
+                        </div>
+                        <blockquote class="testimonial-card__text" itemprop="reviewBody">
+                            "Sou chef de cozinha e reconheço qualidade quando proving. O blend da carne é perfeito, o equilíbrio dos sabores é impecável. Recomendo de olhos fechados!"
+                        </blockquote>
+                        <footer class="testimonial-card__author">
+                            <div class="testimonial-card__avatar">PO</div>
+                            <div>
+                                <cite class="testimonial-card__name" itemprop="author">Paulo Oliveira</cite>
+                                <span class="testimonial-card__role">Chef & Cliente desde 2019</span>
+                            </div>
+                        </footer>
+                    </article>
+                    <!-- Review 4 -->
+                    <article class="testimonial-card" itemscope itemtype="https://schema.org/Review">
+                        <div class="testimonial-card__stars" aria-label="5 de 5 estrelas">
+                            <svg viewBox="0 0 20 20" fill="#FFC107"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L10 13.27l-4.77 2.44.91-5.32L2.27 6.7l5.34-.78z"/></svg>
+                            <svg viewBox="0 0 20 20" fill="#FFC107"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L10 13.27l-4.77 2.44.91-5.32L2.27 6.7l5.34-.78z"/></svg>
+                            <svg viewBox="0 0 20 20" fill="#FFC107"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L10 13.27l-4.77 2.44.91-5.32L2.27 6.7l5.34-.78z"/></svg>
+                            <svg viewBox="0 0 20 20" fill="#FFC107"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L10 13.27l-4.77 2.44.91-5.32L2.27 6.7l5.34-.78z"/></svg>
+                            <svg viewBox="0 0 20 20" fill="#FFC107"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L10 13.27l-4.77 2.44.91-5.32L2.27 6.7l5.34-.78z"/></svg>
+                        </div>
+                        <blockquote class="testimonial-card__text" itemprop="reviewBody">
+                            "Pedimos pelo delivery e chegou quentinho e perfeito. Embalagem impecável, sabor de restaurante. O milk-shake de Ovomaltine é sensacional!"
+                        </blockquote>
+                        <footer class="testimonial-card__author">
+                            <div class="testimonial-card__avatar">AL</div>
+                            <div>
+                                <cite class="testimonial-card__name" itemprop="author">Ana Lima</cite>
+                                <span class="testimonial-card__role">Cliente delivery</span>
+                            </div>
+                        </footer>
+                    </article>
+                    <!-- Review 5 -->
+                    <article class="testimonial-card" itemscope itemtype="https://schema.org/Review">
+                        <div class="testimonial-card__stars" aria-label="4 de 5 estrelas">
+                            <svg viewBox="0 0 20 20" fill="#FFC107"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L10 13.27l-4.77 2.44.91-5.32L2.27 6.7l5.34-.78z"/></svg>
+                            <svg viewBox="0 0 20 20" fill="#FFC107"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L10 13.27l-4.77 2.44.91-5.32L2.27 6.7l5.34-.78z"/></svg>
+                            <svg viewBox="0 0 20 20" fill="#FFC107"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L10 13.27l-4.77 2.44.91-5.32L2.27 6.7l5.34-.78z"/></svg>
+                            <svg viewBox="0 0 20 20" fill="#FFC107"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L10 13.27l-4.77 2.44.91-5.32L2.27 6.7l5.34-.78z"/></svg>
+                            <svg viewBox="0 0 20 20" fill="#ddd"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L10 13.27l-4.77 2.44.91-5.32L2.27 6.7l5.34-.78z"/></svg>
+                        </div>
+                        <blockquote class="testimonial-card__text" itemprop="reviewBody">
+                            "Lugar maravilhoso para ir com amigos! Cerveja artesanal gelada, hambúrguer no ponto e música boa. Só acho que poderia ter mais opções vegetarianas."
+                        </blockquote>
+                        <footer class="testimonial-card__author">
+                            <div class="testimonial-card__avatar">JF</div>
+                            <div>
+                                <cite class="testimonial-card__name" itemprop="author">Juliana Ferreira</cite>
+                                <span class="testimonial-card__role">Cliente desde 2022</span>
+                            </div>
+                        </footer>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== BEST BURGERS SECTION ===== -->
+        <section id="melhores" class="best-burgers" aria-label="Nossos melhores hambúrgueres">
+            <div class="container">
+                <header class="section-header">
+                    <span class="section-header__tag">Nossos Favoritos</span>
+                    <h2 class="section-header__title">Os Melhores da Casa</h2>
+                    <p class="section-header__subtitle">Selecionados pelo nosso chef e aprovados por milhares de clientes.</p>
+                </header>
+                <div class="burgers-grid">
+                    <!-- Burger 1 -->
+                    <article class="burger-card" itemscope itemtype="https://schema.org/Product">
+                        <div class="burger-card__image">
+                            <img src="https://thumbs.dreamstime.com/b/close-up-cl%C3%A1ssico-do-hamburguer-120662126.jpg" alt="Clássico da Casa" loading="lazy" width="300" height="220">
+                            <span class="burger-card__badge">Mais Pedido</span>
+                        </div>
+                        <div class="burger-card__body">
+                            <h3 class="burger-card__name" itemprop="name">Clássico da Casa</h3>
+                            <span class="burger-card__price" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+                                <meta itemprop="priceCurrency" content="BRL">
+                                <span itemprop="price">R$ 32,90</span>
+                            </span>
+                            <ul class="burger-card__ingredients">
+                                <li>Blend bovino 180g</li>
+                                <li>Queijo cheddar</li>
+                                <li>Alface americana</li>
+                                <li>Tomate fresco</li>
+                                <li>Molho especial</li>
+                            </ul>
+                            <a href="#cardapio" class="btn btn--primary btn--block">Pedir Agora</a>
+                        </div>
+                    </article>
+                    <!-- Burger 2 -->
+                    <article class="burger-card" itemscope itemtype="https://schema.org/Product">
+                        <div class="burger-card__image">
+                            <img src="https://cdn.abrahao.com.br/base/f42/a37/d11/smash-burger.jpg" alt="Smash Inferno" loading="lazy" width="300" height="220">
+                            <span class="burger-card__badge burger-card__badge--hot">Picante</span>
+                        </div>
+                        <div class="burger-card__body">
+                            <h3 class="burger-card__name" itemprop="name">Smash Inferno</h3>
+                            <span class="burger-card__price" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+                                <meta itemprop="priceCurrency" content="BRL">
+                                <span itemprop="price">R$ 38,90</span>
+                            </span>
+                            <ul class="burger-card__ingredients">
+                                <li>2 smash patties 120g</li>
+                                <li>Queijo pepper jack</li>
+                                <li>Jalapeños frescos</li>
+                                <li>Bacon crocante</li>
+                                <li>Molho inferno</li>
+                            </ul>
+                            <a href="#cardapio" class="btn btn--primary btn--block">Pedir Agora</a>
+                        </div>
+                    </article>
+                    <!-- Burger 3 -->
+                    <article class="burger-card" itemscope itemtype="https://schema.org/Product">
+                        <div class="burger-card__image">
+                            <img src="https://imagens.jotaja.com/produtos/4034/E3694EFDBB87284AF288E8091897F92AA8C6865C49CE912256F0AA427CA7E498.jpeg" alt="Tradicional com Ovo" loading="lazy" width="300" height="220">
+                        </div>
+                        <div class="burger-card__body">
+                            <h3 class="burger-card__name" itemprop="name">Tradicional com Ovo</h3>
+                            <span class="burger-card__price" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+                                <meta itemprop="priceCurrency" content="BRL">
+                                <span itemprop="price">R$ 34,90</span>
+                            </span>
+                            <ul class="burger-card__ingredients">
+                                <li>Blend bovino 180g</li>
+                                <li>Ovo na chapa</li>
+                                <li>Queijo muçarela</li>
+                                <li>Alface e tomate</li>
+                                <li>Maionese da casa</li>
+                            </ul>
+                            <a href="#cardapio" class="btn btn--primary btn--block">Pedir Agora</a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== CAROUSEL / CARDÁPIO ===== -->
+        <section id="cardapio" class="carousel-section" aria-label="Cardápio completo">
+            <div class="container">
+                <header class="section-header">
+                    <span class="section-header__tag">Cardápio</span>
+                    <h2 class="section-header__title">Explore Nosso Menu</h2>
+                    <p class="section-header__subtitle">Deslize para ver todas as opções deliciosas que preparamos para você.</p>
+                </header>
+                <div class="carousel" role="region" aria-label="Carrossel de hambúrgueres" aria-roledescription="carrossel">
+                    <button class="carousel__btn carousel__btn--prev" aria-label="Anterior">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+                    </button>
+                    <div class="carousel__track-wrapper">
+                        <div class="carousel__track" id="carouselTrack">
+                            <!-- Item 1 -->
+                            <div class="carousel__slide" role="group" aria-label="1 de 8">
+                                <div class="carousel__card">
+                                    <img class="carousel__card-img" src="https://thumbs.dreamstime.com/b/close-up-cl%C3%A1ssico-do-hamburguer-120662126.jpg" alt="Burger Clássico" loading="lazy" width="260" height="180">
+                                    <h3>Burger Clássico</h3>
+                                    <p class="carousel__card-price">R$ 29,90</p>
+                                </div>
+                            </div>
+                            <!-- Item 2 -->
+                            <div class="carousel__slide" role="group" aria-label="2 de 8">
+                                <div class="carousel__card">
+                                    <img class="carousel__card-img" src="https://cdn.abrahao.com.br/base/f42/a37/d11/smash-burger.jpg" alt="Smash Duplo" loading="lazy" width="260" height="180">
+                                    <h3>Smash Duplo</h3>
+                                    <p class="carousel__card-price">R$ 36,90</p>
+                                </div>
+                            </div>
+                            <!-- Item 3 -->
+                            <div class="carousel__slide" role="group" aria-label="3 de 8">
+                                <div class="carousel__card">
+                                    <img class="carousel__card-img" src="https://thumbs.dreamstime.com/b/bacon-supremo-hamburguer-120662126.jpg" alt="Bacon Supremo" loading="lazy" width="260" height="180">
+                                    <h3>Bacon Supremo</h3>
+                                    <p class="carousel__card-price">R$ 39,90</p>
+                                </div>
+                            </div>
+                            <!-- Item 4 -->
+                            <div class="carousel__slide" role="group" aria-label="4 de 8">
+                                <div class="carousel__card">
+                                    <img class="carousel__card-img" src="https://www.fastburguerx.com.br/public/files/produtos/fast-x-vegetariano-493-4570.webp" alt="Veggie Burger" loading="lazy" width="260" height="180">
+                                    <h3>Veggie Burger</h3>
+                                    <p class="carousel__card-price">R$ 28,90</p>
+                                </div>
+                            </div>
+                            <!-- Item 5 -->
+                            <div class="carousel__slide" role="group" aria-label="5 de 8">
+                                <div class="carousel__card">
+                                    <img class="carousel__card-img" src="https://www.kikkoman.com.br/kikkomanbrasil/dist/img/destaque/receitas/X-Burger.jpg" alt="Onion Ring Burger" loading="lazy" width="260" height="180">
+                                    <h3>Onion Ring Burger</h3>
+                                    <p class="carousel__card-price">R$ 35,90</p>
+                                </div>
+                            </div>
+                            <!-- Item 6 -->
+                            <div class="carousel__slide" role="group" aria-label="6 de 8">
+                                <div class="carousel__card">
+                                    <img class="carousel__card-img" src="https://s3.us-west-2.amazonaws.com/whatsmenu/production/hamburgueriaartesanaldofamilia/products/789089/hamburgueriaartesanaldofamiliagfzq9fX0vnxTw5owebp" alt="BBQ Pulled" loading="lazy" width="260" height="180">
+                                    <h3>BBQ Pulled</h3>
+                                    <p class="carousel__card-price">R$ 42,90</p>
+                                </div>
+                            </div>
+                            <!-- Item 7 -->
+                            <div class="carousel__slide" role="group" aria-label="7 de 8">
+                                <div class="carousel__card">
+                                    <img class="carousel__card-img" src="https://piracanjuba-institucional-prd.s3.sa-east-1.amazonaws.com/recipe_images/image/smash-burger-cheddar-piracanjuba-1108x830px-600.webp" alt="Duplo Cheddar" loading="lazy" width="260" height="180">
+                                    <h3>Duplo Cheddar</h3>
+                                    <p class="carousel__card-price">R$ 37,90</p>
+                                </div>
+                            </div>
+                            <!-- Item 8 -->
+                            <div class="carousel__slide" role="group" aria-label="8 de 8">
+                                <div class="carousel__card">
+                                    <img class="carousel__card-img" src="https://veja.abril.com.br/wp-content/uploads/2017/11/mega-stacker-atocc82mico-4-0.jpg?quality=70&strip=info&resize=1080,565&crop=1" alt="Stack Triplo" loading="lazy" width="260" height="180">
+                                    <h3>Stack Triplo</h3>
+                                    <p class="carousel__card-price">R$ 49,90</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="carousel__btn carousel__btn--next" aria-label="Próximo">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+                    </button>
+                    <div class="carousel__dots" role="tablist" aria-label="Navegação do carrossel"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== VISIT US SECTION ===== -->
+        <section id="local" class="visit-section" aria-label="Conheça o local">
+            <div class="container">
+                <header class="section-header">
+                    <span class="section-header__tag">Visite-nos</span>
+                    <h2 class="section-header__title">Conheça o Local</h2>
+                    <p class="section-header__subtitle">Um ambiente acolhedor com decoração industrial, música boa e cerveja gelada.</p>
+                </header>
+                <div class="visit-grid">
+                    <div class="visit-info">
+                        <div class="visit-info__block">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                            <div>
+                                <h3>Endereço</h3>
+                                <p>Rua dos Sabores, 420<br>Centro, São Paulo - SP<br>CEP 01001-000</p>
+                            </div>
+                        </div>
+                        <div class="visit-info__block">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                            <div>
+                                <h3>Horário de Funcionamento</h3>
+                                <p>Ter a Qui: 17h - 23h<br>Sex e Sáb: 17h - 00h<br>Dom: 11h - 22h<br>Seg: Fechado</p>
+                            </div>
+                        </div>
+                        <div class="visit-info__block">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+                            <div>
+                                <h3>Telefone</h3>
+                                <p><a href="tel:+5511999999999">(11) 99999-9999</a></p>
+                            </div>
+                        </div>
+                        <a href="https://wa.me/5511999999999" class="btn btn--whatsapp btn--lg" target="_blank" rel="noopener noreferrer" aria-label="Fale conosco pelo WhatsApp">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                            Fale Conosco
+                        </a>
+                    </div>
+                    <div class="visit-map">
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3657.197646157558!2d-46.63330862554747!3d-23.55052596156941!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce59c8da0aa315%3A0xd59f9431f2c9776a!2sRua%20Augusta%2C%20S%C3%A3o%20Paulo%20-%20SP!5e0!3m2!1spt-BR!2sbr!4v1700000000000!5m2!1spt-BR!2sbr"
+                            width="100%"
+                            height="100%"
+                            style="border:0; border-radius:16px;"
+                            allowfullscreen=""
+                            loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade"
+                            title="Localização da Hamburgueria no Google Maps">
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ===== FOOTER ===== -->
+    <footer id="contato" class="footer" role="contentinfo">
+        <div class="container">
+            <div class="footer__grid">
+                <div class="footer__brand">
+                    <a href="#" class="footer__logo" aria-label="Hamburgueria">
+                        <svg class="footer__logo-icon" viewBox="0 0 40 40" width="40" height="40" aria-hidden="true">
+                            <ellipse cx="20" cy="14" rx="14" ry="6" fill="#E8A832"/>
+                            <rect x="7" y="18" width="26" height="4" rx="2" fill="#4CAF50"/>
+                            <rect x="7" y="22" width="26" height="5" rx="2.5" fill="#795548"/>
+                            <path d="M7 27 L33 27 Q33 34 20 34 Q7 34 7 27 Z" fill="#E8A832"/>
+                        </svg>
+                        <span>Hamburgueria</span>
+                    </a>
+                    <p>Hambúrgueres artesanais feitos com paixão e ingredientes selecionados. Desde 2018 trazendo sabores incomparáveis para sua mesa.</p>
+                    <div class="footer__social">
+                        <a href="#" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+                        </a>
+                        <a href="#" aria-label="Facebook" target="_blank" rel="noopener noreferrer">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                        </a>
+                        <a href="#" aria-label="TikTok" target="_blank" rel="noopener noreferrer">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 2.99 1.75 4.05 1.12 1.07 2.58 1.62 4.11 1.68v3.92c-1.53-.05-3.02-.48-4.32-1.29-.67-.4-1.29-.89-1.82-1.45v6.46c.01 2.72-.95 5.38-2.75 7.48-2.42 2.84-6.37 4.18-10.04 3.35-3.61-.75-6.62-3.53-7.66-7.07-.24-.9-.38-1.83-.39-2.77v-.64c.12-2.6 1.18-5.1 2.98-6.97 2.22-2.32 5.46-3.53 8.63-3.24v3.92c-2.37-.3-4.79.72-6.14 2.7-.96 1.35-1.38 3.04-1.21 4.69.19 2.1 1.35 4.03 3.09 5.2 1.34.9 2.97 1.35 4.59 1.24 1.61-.1 3.14-.77 4.29-1.88 1.45-1.4 2.27-3.37 2.27-5.4V.02h-3.5z"/></svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="footer__links">
+                    <h4>Navegação</h4>
+                    <ul>
+                        <li><a href="#hero">Início</a></li>
+                        <li><a href="#depoimentos">Depoimentos</a></li>
+                        <li><a href="#melhores">Melhores</a></li>
+                        <li><a href="#cardápio">Cardápio</a></li>
+                        <li><a href="#local">Local</a></li>
+                    </ul>
+                </div>
+                <div class="footer__links">
+                    <h4>Horários</h4>
+                    <ul>
+                        <li>Ter - Qui: 17h - 23h</li>
+                        <li>Sex - Sáb: 17h - 00h</li>
+                        <li>Domingo: 11h - 22h</li>
+                        <li>Segunda: Fechado</li>
+                    </ul>
+                </div>
+                <div class="footer__contact">
+                    <h4>Contato</h4>
+                    <ul>
+                        <li>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+                            <a href="tel:+5511999999999">(11) 99999-9999</a>
+                        </li>
+                        <li>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                            <a href="mailto:contato@hamburgueria.com.br">contato@hamburgueria.com.br</a>
+                        </li>
+                        <li>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                            <span>Rua dos Sabores, 420</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer__bottom">
+                <p>&copy; 2024 Hamburgueria. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
