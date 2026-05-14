@@ -363,8 +363,8 @@
  }
 
  // delta > 0 = scrolling down (advance video)
- // Normalize delta: ~100 pixels of scroll ≈ 1% of video
- var step = (delta / 100) * (1 / videoDuration);
+ // Normalize delta: ~250 pixels of scroll ≈ 1% of video (slower = more fluid)
+ var step = (delta / 750) * (1 / videoDuration);
  videoProgress = Math.min(Math.max(videoProgress + step, 0), 1);
 
  var targetTime = videoProgress * videoDuration;
