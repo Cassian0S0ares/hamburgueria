@@ -231,9 +231,91 @@
     }
 
 
+
+/* ---- Galeria Carousel (auto-play) ---- */
+(function () {
+	var carousel = document.querySelector(".galeria__carousel");
+	if (!carousel) return;
+
+	var track = carousel.querySelector(".galeria__track");
+	var slides = carousel.querySelectorAll(".galeria__slide");
+	var dotsContainer = carousel.querySelector(".galeria__dots");
+	var current = 0;
+	var autoTimer = null;
+
+	// Build dots
+	function buildDots() {
+		if (!dotsContainer) return;
+		dotsContainer.innerHTML = "";
+		slides.forEach(function (_, i) {
+			var dot = document.createElement("button");
+			dot.className = "galeria__dot" + (i === 0 ? " galeria__dot--active" : "");
+			dot.setAttribute("aria-label", "Ver foto " + (i + 1));
+			dot.setAttribute("role", "tab");
+			dot.dataset.index = i;
+			dot.addEventListener("click", function () {
+				goTo(i);
+				resetAuto();
+			});
+			dotsContainer.appendChild(dot);
+		});
+	}
+
+	function updateDots() {
+		if (!dotsContainer) return;
+		dotsContainer.querySelectorAll(".galeria__dot").forEach(function (dot, i) {
+			dot.classList.toggle("galeria__dot--active", i === current);
+		});
+	}
+
+	function goTo(index) {
+		current = ((index % slides.length) + slides.length) % slides.length;
+		track.style.transform = "translateX(-" + (current * 100) + "%)";
+		updateDots();
+	}
+
+	function next() {
+		goTo(current + 1);
+	}
+
+	function startAuto() {
+		autoTimer = setInterval(next, 3500);
+	}
+
+	function resetAuto() {
+		clearInterval(autoTimer);
+		startAuto();
+	}
+
+	// Pause on hover
+	carousel.addEventListener("mouseenter", function () {
+		clearInterval(autoTimer);
+	});
+	carousel.addEventListener("mouseleave", function () {
+		startAuto();
+	});
+
+	// Touch swipe
+	var touchStartX = 0;
+	carousel.addEventListener("touchstart", function (e) {
+		touchStartX = e.changedTouches[0].screenX;
+		clearInterval(autoTimer);
+	}, { passive: true });
+	carousel.addEventListener("touchend", function (e) {
+		var diff = e.changedTouches[0].screenX - touchStartX;
+		if (Math.abs(diff) > 50) {
+			if (diff < 0) goTo(current + 1);
+			else goTo(current - 1);
+		}
+		startAuto();
+	}, { passive: true });
+
+	buildDots();
+	startAuto();
+})();
     /* ---- Scroll Reveal ---- */
     var revealElements = document.querySelectorAll(
-        '.testimonial-card, .burger-card, .visit-info__block, .section-header'
+        '.testimonial-card, .burger-card, .visit-info__block, .section-header, .galeria__carousel'
     );
 
     revealElements.forEach(function (el) {
