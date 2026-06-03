@@ -232,87 +232,89 @@
 
 
 
-/* ---- Galeria Carousel (auto-play) ---- */
-(function () {
-	var carousel = document.querySelector(".galeria__carousel");
-	if (!carousel) return;
+    /* ---- Galeria Carousel (auto-play) ---- */
+    (function () {
+        var carousel = document.querySelector(".galeria__carousel");
+        if (!carousel) return;
 
-	var track = carousel.querySelector(".galeria__track");
-	var slides = carousel.querySelectorAll(".galeria__slide");
-	var dotsContainer = carousel.querySelector(".galeria__dots");
-	var current = 0;
-	var autoTimer = null;
+        var gTrack = carousel.querySelector(".galeria__track");
+        var gSlides = carousel.querySelectorAll(".galeria__slide");
+        var gDotsContainer = carousel.querySelector(".galeria__dots");
+        var gCurrent = 0;
+        var gAutoTimer = null;
 
-	// Build dots
-	function buildDots() {
-		if (!dotsContainer) return;
-		dotsContainer.innerHTML = "";
-		slides.forEach(function (_, i) {
-			var dot = document.createElement("button");
-			dot.className = "galeria__dot" + (i === 0 ? " galeria__dot--active" : "");
-			dot.setAttribute("aria-label", "Ver foto " + (i + 1));
-			dot.setAttribute("role", "tab");
-			dot.dataset.index = i;
-			dot.addEventListener("click", function () {
-				goTo(i);
-				resetAuto();
-			});
-			dotsContainer.appendChild(dot);
-		});
-	}
+        // Build dots
+        function buildGDots() {
+            if (!gDotsContainer) return;
+            gDotsContainer.innerHTML = "";
+            gSlides.forEach(function (_, i) {
+                var dot = document.createElement("button");
+                dot.className = "galeria__dot" + (i === 0 ? " galeria__dot--active" : "");
+                dot.setAttribute("aria-label", "Ver foto " + (i + 1));
+                dot.setAttribute("role", "tab");
+                dot.dataset.index = i;
+                dot.addEventListener("click", function () {
+                    gGoTo(i);
+                    gResetAuto();
+                });
+                gDotsContainer.appendChild(dot);
+            });
+        }
 
-	function updateDots() {
-		if (!dotsContainer) return;
-		dotsContainer.querySelectorAll(".galeria__dot").forEach(function (dot, i) {
-			dot.classList.toggle("galeria__dot--active", i === current);
-		});
-	}
+        function updateGDots() {
+            if (!gDotsContainer) return;
+            gDotsContainer.querySelectorAll(".galeria__dot").forEach(function (dot, i) {
+                dot.classList.toggle("galeria__dot--active", i === gCurrent);
+            });
+        }
 
-	function goTo(index) {
-		current = ((index % slides.length) + slides.length) % slides.length;
-		track.style.transform = "translateX(-" + (current * 100) + "%)";
-		updateDots();
-	}
+        function gGoTo(index) {
+            gCurrent = ((index % gSlides.length) + gSlides.length) % gSlides.length;
+            gTrack.style.transform = "translateX(-" + (gCurrent * 100) + "%)";
+            updateGDots();
+        }
 
-	function next() {
-		goTo(current + 1);
-	}
+        function gNext() {
+            gGoTo(gCurrent + 1);
+        }
 
-	function startAuto() {
-		autoTimer = setInterval(next, 3500);
-	}
+        function gStartAuto() {
+            gAutoTimer = setInterval(gNext, 3500);
+        }
 
-	function resetAuto() {
-		clearInterval(autoTimer);
-		startAuto();
-	}
+        function gResetAuto() {
+            clearInterval(gAutoTimer);
+            gStartAuto();
+        }
 
-	// Pause on hover
-	carousel.addEventListener("mouseenter", function () {
-		clearInterval(autoTimer);
-	});
-	carousel.addEventListener("mouseleave", function () {
-		startAuto();
-	});
+        // Pause on hover
+        carousel.addEventListener("mouseenter", function () {
+            clearInterval(gAutoTimer);
+        });
+        carousel.addEventListener("mouseleave", function () {
+            gStartAuto();
+        });
 
-	// Touch swipe
-	var touchStartX = 0;
-	carousel.addEventListener("touchstart", function (e) {
-		touchStartX = e.changedTouches[0].screenX;
-		clearInterval(autoTimer);
-	}, { passive: true });
-	carousel.addEventListener("touchend", function (e) {
-		var diff = e.changedTouches[0].screenX - touchStartX;
-		if (Math.abs(diff) > 50) {
-			if (diff < 0) goTo(current + 1);
-			else goTo(current - 1);
-		}
-		startAuto();
-	}, { passive: true });
+        // Touch swipe
+        var gTouchStartX = 0;
+        carousel.addEventListener("touchstart", function (e) {
+            gTouchStartX = e.changedTouches[0].screenX;
+            clearInterval(gAutoTimer);
+        }, { passive: true });
+        carousel.addEventListener("touchend", function (e) {
+            var diff = e.changedTouches[0].screenX - gTouchStartX;
+            if (Math.abs(diff) > 50) {
+                if (diff < 0) gGoTo(gCurrent + 1);
+                else gGoTo(gCurrent - 1);
+            }
+            gStartAuto();
+        }, { passive: true });
 
-	buildDots();
-	startAuto();
-})();
+        buildGDots();
+        gStartAuto();
+    })();
+
+
     /* ---- Scroll Reveal ---- */
     var revealElements = document.querySelectorAll(
         '.testimonial-card, .burger-card, .visit-info__block, .section-header, .galeria__carousel'
@@ -353,210 +355,286 @@
         });
     }
 
- /* ---- Scroll-driven hero video ---- */
- var heroVideo = document.querySelector('.hero__burger-video');
- var heroSection = document.getElementById('hero');
- var progressBar = document.querySelector('.hero__video-progress-bar');
- var scrollIndicator = document.querySelector('.hero__scroll-indicator');
 
- if (heroVideo && heroSection) {
- var videoReady = false;
- var videoDuration = 0;
- var videoProgress = 0;      // 0→1 how far the video has played
- var isLocked = false;        // true while hero is fixed/trapping scroll
- var videoComplete = false;
- var scrollLockTimeout = null; // flag to temporarily allow scroll during unlock
+    /* ===========================================================
+       SCROLL-DRIVEN HERO BACKGROUND VIDEO
+       The video plays as the user scrolls down.
+       Once it reaches the end, the hero unlocks and the user
+       can continue scrolling to the rest of the page naturally.
+       =========================================================== */
 
- function onVideoReady() {
- if (videoReady) return;
- videoReady = true;
- videoDuration = heroVideo.duration;
+    var canvas = document.getElementById('hero-canvas');
+    var heroSection = document.getElementById('hero');
+    var progressBar = document.querySelector('.hero__video-progress-bar');
+    var scrollIndicator = document.querySelector('.hero__scroll-indicator');
 
- heroVideo.pause();
- heroVideo.currentTime = 0;
+    if (canvas && heroSection) {
+        var ctx = canvas.getContext('2d');
+        var totalFrames = 192;
+        var frames = [];
+        var videoProgress = 0;       // 0→1 how far the sequence has played
+        var isLocked = false;         // true while hero is fixed/trapping scroll
+        var videoComplete = false;
+        var unlockingInProgress = false;
+        var rafId = null;
+        var targetProgress = 0;
+        var currentFrameIndex = 0;
 
- if (scrollIndicator) {
- scrollIndicator.classList.add('hero__scroll-indicator--waiting');
- }
+        // Cover logic for canvas drawing (like object-fit: cover)
+        function drawImageCover(ctx, img, x, y, w, h) {
+            var iw = img.width;
+            var ih = img.height;
+            if (!iw || !ih) return;
+            var r = Math.max(w / iw, h / ih);
+            var sw = w / r;
+            var sh = h / r;
+            var sx = (iw - sw) / 2;
+            var sy = (ih - sh) / 2;
+            ctx.drawImage(img, sx, sy, sw, sh, x, y, w, h);
+        }
 
- // Intercept wheel events to drive the video
- window.addEventListener('wheel', onWheel, { passive: false });
- // Also intercept touch scroll on mobile
- window.addEventListener('touchmove', onTouchMove, { passive: false });
- // Intercept keyboard scroll (arrow keys, space, page down)
- window.addEventListener('keydown', onKeyDown);
- }
+        function drawCurrentFrame() {
+            var img = frames[currentFrameIndex];
+            if (!img) {
+                img = frames[0];
+            }
+            if (img && img.complete) {
+                drawImageCover(ctx, img, 0, 0, canvas.width, canvas.height);
+            }
+        }
 
- function lockHero() {
- if (isLocked) return;
- isLocked = true;
- heroSection.classList.add('hero--video-playing');
- document.body.classList.add('hero-locked');
+        function resizeCanvas() {
+            var dpr = window.devicePixelRatio || 1;
+            canvas.width = canvas.clientWidth * dpr;
+            canvas.height = canvas.clientHeight * dpr;
+            drawCurrentFrame();
+        }
+        window.addEventListener('resize', resizeCanvas);
 
- // Add spacer to prevent page content from jumping up
- // when hero goes position:fixed (out of flow)
- var spacer = document.createElement('div');
- spacer.id = 'hero-spacer';
- spacer.style.height = heroSection.offsetHeight + 'px';
- heroSection.parentNode.insertBefore(spacer, heroSection.nextSibling);
- }
+        // Preload frames
+        var firstFrame = new Image();
+        firstFrame.src = 'assets/Hamburguer_opening_video_2026_frames/frame_000.png';
+        firstFrame.onload = function() {
+            frames[0] = firstFrame;
+            resizeCanvas();
+            onVideoReady(); // Trigger interactions once first frame is ready
+        };
 
- function unlockHero() {
- if (!isLocked) return;
+        // If first frame fails, still trigger so site doesn't lock
+        firstFrame.onerror = function() {
+            onVideoReady();
+        };
 
- // Briefly allow scrolling for the transition
- scrollLockTimeout = true;
+        for (var i = 1; i < totalFrames; i++) {
+            (function(index) {
+                var img = new Image();
+                var padded = String(index).padStart(3, '0');
+                img.src = 'assets/Hamburguer_opening_video_2026_frames/frame_' + padded + '.png';
+                img.onload = function() {
+                    frames[index] = img;
+                    // If we just loaded the current index, draw it
+                    if (index === currentFrameIndex) {
+                        drawCurrentFrame();
+                    }
+                };
+            })(i);
+        }
 
- isLocked = false;
- heroSection.classList.remove('hero--video-playing');
- heroSection.classList.add('hero--video-done');
- document.body.classList.remove('hero-locked');
+        // Smoothly seek using requestAnimationFrame
+        function smoothSeek() {
+            // Ease toward target
+            var diff = targetProgress - videoProgress;
+            if (Math.abs(diff) < 0.0005) {
+                videoProgress = targetProgress;
+            } else {
+                videoProgress += diff * 0.15;
+            }
 
- // Remove spacer
- var spacer = document.getElementById('hero-spacer');
- if (spacer) spacer.remove();
+            // Clamp
+            videoProgress = Math.max(0, Math.min(1, videoProgress));
 
- // Scroll past the hero to the next section
- var nextSection = heroSection.nextElementSibling;
- if (nextSection) {
- setTimeout(function() {
- nextSection.scrollIntoView({ behavior: 'smooth' });
- // Re-enable scroll lock prevention after transition
- setTimeout(function() {
- scrollLockTimeout = null;
- }, 1000);
- }, 50);
- } else {
- scrollLockTimeout = null;
- }
+            // Map progress to frame index
+            currentFrameIndex = Math.round(videoProgress * (totalFrames - 1));
+            drawCurrentFrame();
 
- if (scrollIndicator) {
- scrollIndicator.classList.remove('hero__scroll-indicator--waiting');
- scrollIndicator.classList.add('hero__scroll-indicator--done');
- }
- }
+            // Update progress bar
+            if (progressBar) {
+                progressBar.style.width = (videoProgress * 100) + '%';
+            }
 
- function advanceVideo(delta) {
- if (!videoReady || !videoDuration || videoComplete) return;
+            // Check completion
+            if (videoProgress >= 0.99 && !videoComplete) {
+                videoComplete = true;
+                videoProgress = 1;
+                targetProgress = 1;
+                currentFrameIndex = totalFrames - 1;
+                drawCurrentFrame();
+                if (progressBar) progressBar.style.width = '100%';
+                unlockHero();
+                return;
+            }
 
- // Lock hero on first interaction
- if (!isLocked) {
- lockHero();
- }
+            rafId = requestAnimationFrame(smoothSeek);
+        }
 
- // delta > 0 = scrolling down (advance video)
- // Normalize delta: ~250 pixels of scroll ≈ 1% of video (slower = more fluid)
- var step = (delta / 750) * (1 / videoDuration);
- videoProgress = Math.min(Math.max(videoProgress + step, 0), 1);
+        function startSmoothSeek() {
+            if (rafId) cancelAnimationFrame(rafId);
+            rafId = requestAnimationFrame(smoothSeek);
+        }
 
- var targetTime = videoProgress * videoDuration;
- if (Math.abs(heroVideo.currentTime - targetTime) > 0.03) {
- heroVideo.currentTime = targetTime;
- }
+        var videoReady = false;
+        function onVideoReady() {
+            if (videoReady) return;
+            videoReady = true;
 
- // Update progress bar
- if (progressBar) {
- progressBar.style.width = (videoProgress * 100) + '%';
- }
+            if (scrollIndicator) {
+                scrollIndicator.classList.add('hero__scroll-indicator--waiting');
+            }
 
- // Video complete — unlock and let user scroll
- if (videoProgress >= 1 && !videoComplete) {
- videoComplete = true;
- unlockHero();
- }
- }
+            // Intercept wheel events to drive the frames
+            window.addEventListener('wheel', onWheel, { passive: false });
+            // Also intercept touch scroll on mobile
+            window.addEventListener('touchmove', onTouchMove, { passive: false });
+            // Intercept keyboard scroll
+            window.addEventListener('keydown', onKeyDown);
+        }
 
- function onWheel(e) {
- // Only intercept if hero is visible and video not done
- if (videoComplete) return;
+        function lockHero() {
+            if (isLocked) return;
+            isLocked = true;
+            heroSection.classList.add('hero--video-playing');
+            document.body.classList.add('hero-locked');
 
- var heroRect = heroSection.getBoundingClientRect();
- // If hero is not in view, don't intercept
- if (heroRect.bottom < 0 || heroRect.top > window.innerHeight) return;
+            // Add spacer to prevent page content from jumping
+            var spacer = document.createElement('div');
+            spacer.id = 'hero-spacer';
+            spacer.style.height = heroSection.offsetHeight + 'px';
+            heroSection.parentNode.insertBefore(spacer, heroSection.nextSibling);
+        }
 
- // Only intercept scroll-down events while video is playing
- if (e.deltaY > 0) {
- e.preventDefault();
- advanceVideo(e.deltaY);
- }
- // Allow scroll up only if video hasn't started or to go back in video
- else if (e.deltaY < 0 && isLocked) {
- e.preventDefault();
- advanceVideo(e.deltaY); // negative delta rewinds video
- }
- }
+        function unlockHero() {
+            if (!isLocked || unlockingInProgress) return;
+            unlockingInProgress = true;
 
- var lastTouchY = 0;
- function onTouchStart(e) {
- lastTouchY = e.touches[0].clientY;
- }
- function onTouchMove(e) {
- if (videoComplete) return;
+            if (rafId) {
+                cancelAnimationFrame(rafId);
+                rafId = null;
+            }
 
- var heroRect = heroSection.getBoundingClientRect();
- if (heroRect.bottom < 0 || heroRect.top > window.innerHeight) return;
+            isLocked = false;
+            heroSection.classList.remove('hero--video-playing');
+            heroSection.classList.add('hero--video-done');
+            document.body.classList.remove('hero-locked');
 
- var touchY = e.touches[0].clientY;
- var delta = lastTouchY - touchY; // positive = scroll down
- lastTouchY = touchY;
+            // Remove spacer
+            var spacer = document.getElementById('hero-spacer');
+            if (spacer) spacer.remove();
 
- if (delta !== 0) {
- e.preventDefault();
- advanceVideo(delta * 3); // amplify touch movement
- }
- }
+            if (scrollIndicator) {
+                scrollIndicator.classList.remove('hero__scroll-indicator--waiting');
+                scrollIndicator.classList.add('hero__scroll-indicator--done');
+            }
 
- function onKeyDown(e) {
- if (videoComplete) return;
+            // Smooth scroll past hero to next section
+            var nextSection = heroSection.nextElementSibling;
+            // Skip spacer if it still exists
+            while (nextSection && nextSection.id === 'hero-spacer') {
+                nextSection = nextSection.nextElementSibling;
+            }
+            if (nextSection) {
+                setTimeout(function () {
+                    nextSection.scrollIntoView({ behavior: 'smooth' });
+                    setTimeout(function () {
+                        unlockingInProgress = false;
+                    }, 800);
+                }, 80);
+            } else {
+                unlockingInProgress = false;
+            }
+        }
 
- var heroRect = heroSection.getBoundingClientRect();
- if (heroRect.bottom < 0 || heroRect.top > window.innerHeight) return;
+        function advanceVideo(delta) {
+            if (!videoReady || videoComplete) return;
 
- var scrollKeys = ['ArrowDown', 'Space', 'PageDown', 'ArrowUp', 'PageUp', 'Home', 'End'];
- if (scrollKeys.indexOf(e.code) !== -1) {
- e.preventDefault();
- var delta = 0;
- if (e.code === 'ArrowDown' || e.code === 'Space') delta = 50;
- else if (e.code === 'PageDown') delta = 200;
- else if (e.code === 'ArrowUp') delta = -50;
- else if (e.code === 'PageUp') delta = -200;
- else if (e.code === 'Home') { videoProgress = 0; delta = 0; }
- else if (e.code === 'End') { videoProgress = 1; delta = 0; }
+            // Lock hero on first scroll interaction
+            if (!isLocked) {
+                lockHero();
+                startSmoothSeek();
+            }
 
- if (delta !== 0) {
- advanceVideo(delta);
- } else {
- // Home/End: jump directly
- heroVideo.currentTime = videoProgress * videoDuration;
- if (progressBar) progressBar.style.width = (videoProgress * 100) + '%';
- if (videoProgress >= 1 && !videoComplete) {
- videoComplete = true;
- unlockHero();
- }
- }
- }
- }
+            // delta > 0 = scrolling down (advance frames)
+            // ~600 pixels of scroll ≈ full sequence play
+            var step = delta / (window.innerHeight * 4);
+            targetProgress = Math.max(0, Math.min(1, targetProgress + step));
+        }
 
- // Set up touch listeners
- window.addEventListener('touchstart', onTouchStart, { passive: true });
+        function onWheel(e) {
+            if (videoComplete || unlockingInProgress) return;
 
- // Prevent scroll while hero is locked
- window.addEventListener('scroll', function() {
- if (isLocked && !scrollLockTimeout) {
- window.scrollTo(0, 0);
- }
- }, { passive: false });
+            var heroRect = heroSection.getBoundingClientRect();
+            if (heroRect.bottom < 0 || heroRect.top > window.innerHeight) return;
 
- // Wait for video to be ready
- if (heroVideo.readyState >= 1) {
- onVideoReady();
- } else {
- heroVideo.addEventListener('loadedmetadata', onVideoReady, { once: true });
- heroVideo.addEventListener('durationchange', onVideoReady, { once: true });
- setTimeout(function() {
- if (!videoReady && heroVideo.readyState >= 1) onVideoReady();
- }, 1000);
- }
- }
+            // Intercept scroll
+            if (e.deltaY > 0) {
+                e.preventDefault();
+                advanceVideo(e.deltaY);
+            } else if (e.deltaY < 0 && isLocked) {
+                e.preventDefault();
+                advanceVideo(e.deltaY);
+            }
+        }
+
+        var lastTouchY = 0;
+        function onTouchStart(e) {
+            lastTouchY = e.touches[0].clientY;
+        }
+
+        function onTouchMove(e) {
+            if (videoComplete || unlockingInProgress) return;
+
+            var heroRect = heroSection.getBoundingClientRect();
+            if (heroRect.bottom < 0 || heroRect.top > window.innerHeight) return;
+
+            var touchY = e.touches[0].clientY;
+            var delta = lastTouchY - touchY; // positive = scroll down
+            lastTouchY = touchY;
+
+            if (delta !== 0) {
+                e.preventDefault();
+                advanceVideo(delta * 3);
+            }
+        }
+
+        function onKeyDown(e) {
+            if (videoComplete || unlockingInProgress) return;
+
+            var heroRect = heroSection.getBoundingClientRect();
+            if (heroRect.bottom < 0 || heroRect.top > window.innerHeight) return;
+
+            var scrollKeys = ['ArrowDown', 'Space', 'PageDown', 'ArrowUp', 'PageUp'];
+            if (scrollKeys.indexOf(e.code) !== -1) {
+                e.preventDefault();
+                var delta = 0;
+                if (e.code === 'ArrowDown' || e.code === 'Space') delta = 60;
+                else if (e.code === 'PageDown') delta = 200;
+                else if (e.code === 'ArrowUp') delta = -60;
+                else if (e.code === 'PageUp') delta = -200;
+
+                if (delta !== 0) {
+                    advanceVideo(delta);
+                }
+            }
+        }
+
+        // Set up touch listeners
+        window.addEventListener('touchstart', onTouchStart, { passive: true });
+
+        // Prevent scroll while hero is locked
+        window.addEventListener('scroll', function () {
+            if (isLocked && !unlockingInProgress) {
+                window.scrollTo(0, 0);
+            }
+        }, { passive: false });
+    }
 
 })();

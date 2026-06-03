@@ -84,7 +84,17 @@
 
         <!-- ===== HERO SECTION ===== -->
         <section id="hero" class="hero" aria-label="Seção principal">
-            <div class="hero__bg"></div>
+            <!-- Fullscreen background video/canvas -->
+            <div class="hero__video-bg">
+                <canvas class="hero__bg-canvas" id="hero-canvas" aria-label="Animação interativa de hambúrguer artesanal"></canvas>
+                <div class="hero__video-overlay"></div>
+            </div>
+
+            <!-- Video progress bar -->
+            <div class="hero__video-progress" aria-hidden="true">
+                <div class="hero__video-progress-bar"></div>
+            </div>
+
             <div class="container hero__inner">
                 <div class="hero__content">
                     <span class="hero__badge">Artesanal desde 2018</span>
@@ -110,14 +120,6 @@
                             <strong>30+</strong>
                             <span>Opções no menu</span>
                         </div>
-                    </div>
-                </div>
-                <div class="hero__visual">
-                    <div class="hero__burger-wrap">
-                <video class="hero__burger-video" src="assets/374049230.mp4" muted playsinline preload="auto" aria-label="Vídeo de hambúrguer artesanal"></video></video></video></video>
-                <div class="hero__video-progress" aria-hidden="true">
-                    <div class="hero__video-progress-bar"></div>
-                </div>
                     </div>
                 </div>
             </div>
@@ -415,6 +417,7 @@
 			<div class="section-header">
 				<span class="section-header__tag">Quem Somos</span>
 				<h2 id="galeria-title" class="section-header__title">Conheça a Gente</h2>
+				<p class="section-header__subtitle">Um espaço pensado pra você se sentir em casa.</p>
 			</div>
 
 			<div class="galeria__about">
